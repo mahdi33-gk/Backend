@@ -13,17 +13,23 @@ const Home = () => {
         const form = e.target;
         const email = form.email.value;
         const name = form.name.value;
-        const user = {name,email}
-        console.log(user)
-        fetch('http://localhost:5000/users', {
-            method: 'POST',
+        const userdata = {name,email}
+        console.log(userdata)
+        fetch('http://localhost:5000/users',{
+            method: 'post',
             headers:{
                 'content-type':'application/json'
             },
-            body:JSON.stringify(user)
+            body:JSON.stringify(userdata)
         })
-        .then(res=> res.json())
-        .then(data => console.log(data))
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data)
+            form.reset();
+            const newUser = [...user, data]
+            setUser(newUser)
+        })
+        
     }
     return (
         <div>
@@ -38,7 +44,7 @@ const Home = () => {
                 </form>
             </div>
             <div>
-                {user.map(single=> <p>{single.Roll}</p>)}
+                {user.map(single=> <p>{single.name}</p>)}
             </div>
         </div>
     );
