@@ -26,8 +26,13 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
 
+    const database = client.db("userDB");
+    const userCollection = database.collection("users");
+
     app.post('/users',async(req,res)=>{
         const user =req.body;
+        const result = await userCollection.insertOne(user);
+        res.send(result)
         console.log(user)
     })
 
@@ -36,7 +41,7 @@ async function run() {
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
     // Ensures that the client will close when you finish/error
-    await client.close();
+    
   }
 }
 run().catch(console.dir);
