@@ -6,12 +6,18 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import App from './App.jsx'
+import Users from './Users.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App></App>,
   },
+  {
+    path:'/users',
+    element: <Users></Users>,
+    loader: ()=>fetch('')
+  }
 ]);
 createRoot(document.getElementById('root')).render(
   <StrictMode>
