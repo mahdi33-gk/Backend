@@ -8,7 +8,7 @@ function App() {
     const email =form.email.value;
     const user = {name,email}
     console.log(user)
-    fetch('http://localhost:5001/users',{
+    fetch('http://localhost:5000/users',{
       method:'post',
       headers:{
         'content-type':'application/json'
